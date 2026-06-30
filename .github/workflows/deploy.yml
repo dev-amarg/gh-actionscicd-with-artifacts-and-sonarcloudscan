@@ -15,11 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      name: download source code as artifact
-      uses: actions/upload-artiact@v4
-      with:
-        name: source-code
-        path: .
+      - name: download source code as artifact
+        uses: actions/upload-artiact@v4
+        with:
+          name: source-code
+          path: .
 
 
   install-and-build:
