@@ -1,11 +1,8 @@
 name: deploy using artifact and SonarCloud
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
 
 permissions:
   contents: write
