@@ -1,0 +1,91 @@
+name: deploy using artifact and SonarCloud
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  download-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      name: download source code as artifact
+      uses: actions/upload-artiact@v4
+      with:
+        name: source-code
+        path: .
+
+
+  install-and-build:
+    runs-on: ubuntu-latest
+    needs: download-code
+
+    steps:
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.8'
+
+      - name: download source code as artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: source-code
+          path: .
+
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: build project
+        run: npm run build
+
+      - name: upload dist folder as artifact
+        uses: actions/upload-atifact@v4
+        with:
+          name: dist-folder
+          path: ./dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: install-and-build
+
+    steps:
+      - name: download dist folder as atifact
+        uses: actions/download-artifact@v4
+        with: 
+          name: dist-folder
+          path: ./dist
+
+      - name: deploy to github actions pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          GITHUB_TOKEN: ${{GITHUB_TOKEN}}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+
+
+  sonar-scan:
+    runs-on: ubuntu-latest
+    needs: download-code
+    continue-on-error: true
+
+    steps:
+      - name: download source code as artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: source-code
+          path: .
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        with:
+          projectBaseDir: .
+        env:
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+        
