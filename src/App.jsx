@@ -22,7 +22,6 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           Amar:count is {count}
         </button>
-        console.log("hello
       </div>
     </>
   )
