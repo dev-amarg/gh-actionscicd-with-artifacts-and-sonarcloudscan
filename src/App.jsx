@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <div>
+        <h1>Github Actions with Artifacts and SonarCube Scan</h1>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -19,7 +20,7 @@ function App() {
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          Amar:count is {count}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
