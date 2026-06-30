@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: download source code
         uses: actions/checkout@v4
+
       - name: upload source code as artifact
-        uses: actions/upload-artiact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: source-code
           path: .
