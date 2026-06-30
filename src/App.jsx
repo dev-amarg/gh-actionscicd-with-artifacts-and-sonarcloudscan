@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>Github Actions with Artifacts and SonarCube Scan</h1>
+        <h1>Github Actions with Artifacts and SonarQube Scan</h1>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -22,13 +22,8 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           Amar:count is {count}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        console.log("hello");
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
